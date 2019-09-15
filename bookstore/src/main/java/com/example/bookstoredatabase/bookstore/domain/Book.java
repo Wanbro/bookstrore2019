@@ -1,28 +1,38 @@
 package com.example.bookstoredatabase.bookstore.domain;
 
-import javax.persistence.Entity;
+import javax.persistence.Entity; 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+
 
 @Entity
 public class Book {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
+	// id has been set to private (not frontend information)
 	private String author, title, year;
+	
+	@ManyToOne
+    @JoinColumn(name = "categoryid")
+    private Category category;
 
 	public Book() {
 	}
 
-	public Book(String author, String title, String year) {
+	public Book(String author, String title, String year, Category category) {
 		super();
 		this.author = author;
 		this.title = title;
 		this.year = year;
+		this.category = category;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -54,4 +64,18 @@ public class Book {
 		this.year = year;
 	}
 
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	public String toString() {
+		if (this.category != null)
+			return "Book [id=" + id + ", author=" + author + ", title=" + title + ", year=" + year + " category =" + this.getCategory() + "]";		
+		else
+			return "Book [id=" + id + ", author=" + author + ", title=" + title + ", year=" + year + "]";
+	}
+	
 }
