@@ -16,7 +16,7 @@ public class Book {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	// id has been set to private (not frontend information)
+
 	private String author, title, year;
 	
 	@ManyToOne
